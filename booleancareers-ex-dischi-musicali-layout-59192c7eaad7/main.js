@@ -12,22 +12,33 @@ $(document).ready(function() {
 
 	let app = new Vue ({
 
-		el: ".cd",
+		el: ".cds-container",
 		data: {
-			titoloDisco: [],
-			autoreDisco: [],
-			annoDisco: [],
+			dischi: {
+				immaginiDisco: [],
+				titoloDisco: [],
+				autoreDisco: [],
+				annoDisco: [],
+			}
 		},
 		methods: {
 			
 		},
 		mounted() {
-			for (let i = 0; i < 11; i++) {
+			for (let i = 0; i < 10; i++) {
 				
 				axios
 				.get('https://flynn.boolean.careers/exercises/api/array/music')
 				.then(resp => {
-					console.log(resp.data.response.title);
+					const immagini = resp.data.response[i].poster;
+					this.dischi.immaginiDisco.push(immagini);
+					const titoli = resp.data.response[i].title;
+					this.dischi.titoloDisco.push(titoli);
+					const autore = resp.data.response[i].author;
+					this.dischi.autoreDisco.push(autore);
+					const anno = resp.data.response[i].year;
+					this.dischi.annoDisco.push(anno);
+					console.log(resp.data);
 				})	
 			}
 		}
