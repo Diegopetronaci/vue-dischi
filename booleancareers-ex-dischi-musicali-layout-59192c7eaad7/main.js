@@ -14,12 +14,7 @@ $(document).ready(function() {
 
 		el: ".cds-container",
 		data: {
-			dischi: {
-				immaginiDisco: [],
-				titoloDisco: [],
-				autoreDisco: [],
-				annoDisco: [],
-			}
+			dischi: [],
 		},
 		methods: {
 			
@@ -29,16 +24,9 @@ $(document).ready(function() {
 				
 				axios
 				.get('https://flynn.boolean.careers/exercises/api/array/music')
-				.then(resp => {
-					const immagini = resp.data.response[i].poster;
-					this.dischi.immaginiDisco.push(immagini);
-					const titoli = resp.data.response[i].title;
-					this.dischi.titoloDisco.push(titoli);
-					const autore = resp.data.response[i].author;
-					this.dischi.autoreDisco.push(autore);
-					const anno = resp.data.response[i].year;
-					this.dischi.annoDisco.push(anno);
-					console.log(resp.data);
+				.then(response => {
+					this.dischi = response.data.response;
+					console.log(response);
 				})	
 			}
 		}
